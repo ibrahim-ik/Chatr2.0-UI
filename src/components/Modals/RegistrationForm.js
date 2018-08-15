@@ -6,7 +6,6 @@ import authStore from "../../stores/authStore";
 
 class RegistationForm extends Component {
   render() {
-    console.log(authStore.errors);
     return (
       <div>
         <form>

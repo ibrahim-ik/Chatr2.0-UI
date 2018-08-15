@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import channelStore from "../../stores/channelStore";
+import { observer } from "mobx-react";
 
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,14 +21,14 @@ class SideNav extends React.Component {
   }
 
   render() {
-    const channelLinks = [{ name: "all" }].map(channel => (
+    const channelLinks = channelStore.channelNames.map(channel => (
       <ChannelNavLink key={channel.name} channel={channel} />
     ));
     return (
       <div>
         <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
           <li className="nav-item" data-toggle="tooltip" data-placement="right">
-            <Link className="nav-link heading" to="/createChannel">
+            <Link className="nav-link heading" to="/channels/create">
               <span className="nav-link-text mr-2">Channels</span>
               <FontAwesomeIcon icon={faPlusCircle} />
             </Link>
@@ -55,4 +57,4 @@ class SideNav extends React.Component {
   }
 }
 
-export default SideNav;
+export default observer(SideNav);
