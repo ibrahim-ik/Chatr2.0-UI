@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import authStore from "../../stores/authStore";
-import channelStore from "../../stores/channelStore";
 import { observer } from "mobx-react";
 
 // FontAwesome
@@ -28,7 +27,7 @@ class ChannelNavLink extends Component {
         </li>
       );
     } else {
-      return <h3> your not loggedin </h3>;
+      return <h3> </h3>;
     }
   }
 }

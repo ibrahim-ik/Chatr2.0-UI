@@ -10,6 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Welcome from "./components/Welcome";
 import SuperSecretPage from "./components/SuperSecretPage";
 import createChannel from "./components/createChannel";
+import CreateMessage from "./components/createMessage";
 import ChannelDetail from "./components/ChannelDetail";
 import channelStore from "./stores/channelStore";
 
@@ -22,14 +23,23 @@ class App extends Component {
         <Switch>
           <Route path="/welcome" component={Welcome} />
           <PrivateRoute path="/private" component={SuperSecretPage} />
-          <Route
-            path="/channels/:channelID/"
-            render={props => {
-              channelStore.getAllMessages(props.match.params.channelID);
-              return <ChannelDetail {...props} />;
-            }}
-          />
           <Route path="/channels/create" component={createChannel} />
+          <PrivateRoute
+            path="/channels/:channelID/"
+            // render={props => {
+            //   channelStore.getAllMessages(props.match.params.channelID);
+            //   return <ChannelDetail {...props} />;
+            // }}
+            component={ChannelDetail}
+          />
+          {/* <Route
+            path="/channels/:channelID/send/"
+            // render={props => {
+            //   channelStore.addAMessage(props.match.params.channelID);
+            //   return <createMessage id={props.match.params.channelID} />;
+            // }}
+            component={CreateMessage}
+          />; }} /> */}
           <Redirect to="/welcome" />
         </Switch>
         <Footer />

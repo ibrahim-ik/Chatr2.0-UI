@@ -2,23 +2,28 @@ import React, { Component } from "react";
 import authStore from "../stores/authStore";
 import channelStore from "../stores/channelStore";
 import { observer } from "mobx-react";
+import ChannelDetail from "./ChannelDetail";
 
-class createChannel extends Component {
+class CreateMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      message: "",
+      id: this.props.id
     };
   }
 
   handleChange(e) {
-    this.setState({ name: e.target.value });
+    // authStore.name = e.target.value;
+    this.setState({ message: e.target.value });
   }
 
-  createChannel() {
-    channelStore.addAChannel(this.state.name);
+  createMessage() {
+    channelStore.addAMessage(this.state.id, this.state.message);
   }
+  // () => channelStore.addAMessage("authStore.name")
   render() {
+    //console.log(this.id);
     return (
       <div>
         {authStore.errors.length > 0 && (
@@ -28,21 +33,20 @@ class createChannel extends Component {
         )}
         <div className="form-group">
           {" "}
-          <p>Place a name for the Channel</p>
           <input
             className="form-control"
             type="text"
-            placeholder={"name"}
+            placeholder={"type your message"}
             required
             onChange={this.handleChange.bind(this)}
           />
         </div>
-        <button onClick={this.createChannel.bind(this)}>
-          Create The Channel...
+        <button onClick={this.createMessage.bind(this)}>
+          Send The Message...
         </button>
       </div>
     );
   }
 }
 
-export default observer(createChannel);
+export default observer(CreateMessage);
